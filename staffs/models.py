@@ -17,9 +17,9 @@ class Staff(models.Model):
     examinationChoices = [
         ("다른병원에서 일반검진", "다른병원에서 일반검진"),
         ("고대에서 일반검진", "고대에서 일반검진"),
-        ("다른병원에서 일반검진", "다른병원에서 일반검진"),
         ("센트럴에서 일반검진", "센트럴에서 일반검진"),
     ]
+    # 일반 특수 다름
 
     name = models.CharField(max_length=10)  # 이름
     is_office = models.BooleanField(default=False)  # 사무직 구분

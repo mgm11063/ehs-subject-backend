@@ -4,7 +4,6 @@ from .models import Company
 
 
 class CompanySerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Company
         fields = (
@@ -19,6 +18,4 @@ class CompanyDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = (
-            "staffs",
-        )
+        fields = ("staffs",)
