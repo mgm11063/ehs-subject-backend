@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
-from .serializers import StaffSerializer
+from .serializers import StaffSerializer, SegTypeSerializer
+from .models import SegType
 
 
 class Staffs(APIView):
@@ -20,3 +21,13 @@ class Staffs(APIView):
                 serializer.errors,
                 status=HTTP_400_BAD_REQUEST,
             )
+
+
+class Segs(APIView):
+    def get(self, request):
+        all_seg_type = SegType.objects.all()
+        serializer = SegTypeSerializer(
+            all_seg_type,
+            many=True,
+        )
+        return Response(serializer.data)

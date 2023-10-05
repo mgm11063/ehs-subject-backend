@@ -6,3 +6,9 @@ class FactorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Factor
         fields = ("pk", "name", "check_cycle")
+
+
+class FactorOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Factor
+        fields = ("name",)
