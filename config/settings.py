@@ -45,7 +45,7 @@ CUSTOM_APPS = [
     "common.apps.CommonConfig",
     "users.apps.UsersConfig",
     "companies.apps.CompaniesConfig",
-    "factors.apps.FactorsConfig",
+    "segs.apps.SegsConfig",
     "staffs.apps.StaffsConfig",
 ]
 

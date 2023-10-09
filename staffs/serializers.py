@@ -1,17 +1,11 @@
 from rest_framework import serializers
-from .models import Staff, SegType
-from factors.serializers import FactorSerializer
-
-
-class SegTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SegType
-        fields = ("name",)
+from .models import Staff
+from segs.models import Seg
+from segs.serializers import SegSerializer
 
 
 class StaffSerializer(serializers.ModelSerializer):
-    seg_type = SegTypeSerializer(read_only=True)
-    factors = FactorSerializer(many=True, read_only=True)
+    segs = SegSerializer(read_only=True)
     read_only_fields = ("examination_date",)
 
     class Meta:
@@ -20,11 +14,10 @@ class StaffSerializer(serializers.ModelSerializer):
             "pk",
             "name",
             "is_office",
-            "seg_type",
             "g_examination",
             "s_examination",
-            "factors",
             "is_night",
             "join_date",
             "is_complete",
+            "segs",
         )

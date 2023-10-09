@@ -1,11 +1,16 @@
 from django.db import models
+from segs.models import Seg
 
 
-class SegType(models.Model):
+class G_examination(models.Model):
+    name = models.CharField(max_length=30)
 
-    """SegType Model Definition"""
+    def __str__(self) -> str:
+        return self.name
 
-    name = models.CharField(max_length=80)
+
+class S_examination(models.Model):
+    name = models.CharField(max_length=30)
 
     def __str__(self) -> str:
         return self.name
@@ -14,37 +19,24 @@ class SegType(models.Model):
 class Staff(models.Model):
     """Staff Definiton"""
 
-    examinationChoices = [
-        ("다른병원에서 일반검진", "다른병원에서 일반검진"),
-        ("고대에서 일반검진", "고대에서 일반검진"),
-        ("센트럴에서 일반검진", "센트럴에서 일반검진"),
-    ]
-    # 일반 특수 다름 추가해야함
+    is_complete = models.BooleanField(default=False)  # 검진완료
 
     name = models.CharField(max_length=10)  # 이름
     is_office = models.BooleanField(default=False)  # 사무직 구분
-
-    seg_type = models.ForeignKey(
-        SegType, related_name="staffs", on_delete=models.SET_NULL, null=True
-    )  # 공정명(SEG)
-    g_examination = models.CharField(
-        max_length=100,
-        choices=examinationChoices,
-    )  # 일반검진 실시 여부
-    s_examination = models.CharField(
-        max_length=100,
-        choices=examinationChoices,
-    )  # 특수검진 실시 여부
-
-    factors = models.ManyToManyField(
-        "factors.Factor",
-        related_name="factors",
-    )
-
     is_night = models.BooleanField(default=False)  # 야간근무자
+
+    g_examination = models.ForeignKey(
+        G_examination, related_name="staffs", on_delete=models.SET_NULL, null=True
+    )
+    s_examination = models.ForeignKey(
+        S_examination, related_name="staffs", on_delete=models.SET_NULL, null=True
+    )
     join_date = models.DateField()  # 입사일
-    is_complete = models.BooleanField(default=False)  # 검진완료
     examination_date = models.DateField()  # 차기 검진일
+
+    segs = models.ForeignKey(
+        Seg, related_name="staffs", on_delete=models.SET_NULL, null=True
+    )
 
     def __str__(self) -> str:
         return self.name

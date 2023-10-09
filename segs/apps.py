@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FactorsConfig(AppConfig):
+class SegsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "factors"
+    name = "segs"
