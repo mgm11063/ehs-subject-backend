@@ -12,6 +12,7 @@ class SegTypeSerializer(serializers.ModelSerializer):
 class StaffSerializer(serializers.ModelSerializer):
     seg_type = SegTypeSerializer(read_only=True)
     factors = FactorSerializer(many=True, read_only=True)
+    read_only_fields = ("examination_date",)
 
     class Meta:
         model = Staff
@@ -26,5 +27,4 @@ class StaffSerializer(serializers.ModelSerializer):
             "is_night",
             "join_date",
             "is_complete",
-            "examination_date",
         )
