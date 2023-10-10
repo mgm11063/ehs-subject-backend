@@ -35,7 +35,7 @@ class Staff(models.Model):
     examination_date = models.DateField()  # 차기 검진일
 
     segs = models.ForeignKey(
-        Seg, related_name="staffs", on_delete=models.SET_NULL, null=True
+        Seg, related_name="staffs", on_delete=models.CASCADE, null=False
     )
 
     def __str__(self) -> str:

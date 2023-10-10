@@ -33,10 +33,7 @@ class Seg(models.Model):
     """Seg Model Definition"""
 
     name = models.CharField(max_length=80)
-    factors = models.ManyToManyField(
-        Factor,
-        related_name="segs",
-    )
+    factors = models.ManyToManyField(Factor, related_name="segs", null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name

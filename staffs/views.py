@@ -2,16 +2,25 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from .serializers import StaffSerializer
-from segs.serializers import SegSerializer
-from segs.models import Seg
+from .serializers import StaffSerializer
+from .models import Staff
 
 
 class Staffs(APIView):
+    def get(self, request):
+        all_staff = Staff.objects.all()
+        serializer = StaffSerializer(
+            all_staff,
+            many=True,
+        )
+        return Response(serializer.data)
+
     def post(self, request):
+        # 여기서 판독
         if isinstance(request.data, dict):
             serializer = StaffSerializer(data=request.data)
         else:
-            serializer = StaffSerializer(data=request.data, many=True)
+            serializer = StaffSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -22,13 +31,3 @@ class Staffs(APIView):
                 serializer.errors,
                 status=HTTP_400_BAD_REQUEST,
             )
-
-
-class Segs(APIView):
-    def get(self, request):
-        all_seg_type = Seg.objects.all()
-        serializer = SegSerializer(
-            all_seg_type,
-            many=True,
-        )
-        return Response(serializer.data)

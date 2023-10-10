@@ -5,15 +5,7 @@ from .models import Factor, Seg
 class FactorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Factor
-        fields = ("pk", "value", "label", "check_cycle", "regular_check_cycle")
-
-
-class FactorOptionSerializer(serializers.ModelSerializer):
-    read_only_fields = ("check_cycle", "regular_check_cycle")
-
-    class Meta:
-        model = Factor
-        fields = ("name",)
+        fields = ("value", "label", "check_cycle", "regular_check_cycle")
 
 
 class SegSerializer(serializers.ModelSerializer):

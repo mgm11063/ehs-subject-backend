@@ -1,13 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Seg, Factor
-from .serializers import FactorOptionSerializer, SegSerializer
+from .serializers import FactorSerializer, SegSerializer
 
 
 class Factors(APIView):
     def get(self, request):
         all_factor = Factor.objects.all()
-        serializer = FactorOptionSerializer(
+        serializer = FactorSerializer(
             all_factor,
             many=True,
         )
