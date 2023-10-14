@@ -8,15 +8,15 @@ class Factor(models.Model):
     )
     label = models.CharField(max_length=100, editable=False)
     check_cycle = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(12)],
+        validators=[MinValueValidator(0), MaxValueValidator(12)],
         null=True,
-        default=6,
+        default=0,
         blank=True,
     )
     regular_check_cycle = models.IntegerField(
-        validators=[MinValueValidator(6), MaxValueValidator(24)],
+        validators=[MinValueValidator(0), MaxValueValidator(24)],
         null=True,
-        default=12,
+        default=0,
         blank=True,
     )
 

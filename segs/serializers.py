@@ -13,4 +13,4 @@ class SegSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Seg
-        fields = ("name", "factors")
+        fields = ("pk", "name", "factors")
