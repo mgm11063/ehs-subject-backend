@@ -19,3 +19,11 @@ class CompanyDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ("staffs",)
+
+
+class CompanyStaffsSerializer(serializers.ModelSerializer):
+    staffs = StaffSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Company
+        fields = ("staffs",)

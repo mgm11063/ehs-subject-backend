@@ -38,7 +38,6 @@ class StaffSerializer(serializers.ModelSerializer):
             "is_night",
             "join_date",
             "pre_examination_date",
-            "is_complete",
             "segs",
         )
 
@@ -51,23 +50,6 @@ class StaffSerializer(serializers.ModelSerializer):
 
 
 class StaffUpdateSerializer(serializers.ModelSerializer):
-    segs = SegSerializer(read_only=True)
-
     class Meta:
         model = Staff
-        fields = (
-            "name",
-            "is_office",
-            "g_examination",
-            "s_examination",
-            "is_night",
-            "join_date",
-            "pre_examination_date",
-        )
-
-    def create(self, validated_data):
-        seg_data = validated_data.pop("segs")
-        seg_instance = Seg.objects.get(name=seg_data["name"])
-        instance = Staff.objects.create(segs=seg_instance, **validated_data)
-
-        return instance
+        fields = ("pre_examination_date",)
