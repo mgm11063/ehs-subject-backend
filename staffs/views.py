@@ -56,3 +56,21 @@ class StaffsUpdateAPIView(APIView):
             pk = update_data.pop("pk")
             Staff.objects.filter(pk=pk).update(**update_data)
         return Response("ok")
+
+
+class StaffDashbord(APIView):
+    def get_object(self, pk):
+        try:
+            company = Company.objects.get(pk=pk)
+            companyStaffs = company.staffs.filter(
+                pre_examination_date__lte=datetime.now().date()
+            )
+            print(companyStaffs)
+            return companyStaffs
+        except Company.DoesNotExist:
+            raise NotFound("Company not found or pre_examination_date is not valid.")
+
+    def get(self, request, pk):
+        companies = self.get_object(pk)
+        serializer = StaffSerializer(companies, many=True)
+        return Response(serializer.data)
