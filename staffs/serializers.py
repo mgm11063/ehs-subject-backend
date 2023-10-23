@@ -20,13 +20,6 @@ class SExaminationSerializer(serializers.ModelSerializer):
 class StaffSerializer(serializers.ModelSerializer):
     segs = SegSerializer()
 
-    # g_examination = serializers.SlugRelatedField(
-    #     many=True, read_only=True, slug_field="name"
-    # )
-    # s_examination = serializers.SlugRelatedField(
-    #     many=True, read_only=True, slug_field="name"
-    # )
-
     class Meta:
         model = Staff
         fields = (
@@ -53,3 +46,21 @@ class StaffUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff
         fields = ("pre_examination_date",)
+
+
+class StaffDashbordSerializer(serializers.ModelSerializer):
+    segs = SegSerializer()
+
+    class Meta:
+        model = Staff
+        fields = (
+            "pk",
+            "name",
+            "is_office",
+            "g_examination",
+            "s_examination",
+            "is_night",
+            "join_date",
+            "pre_examination_date",
+            "segs",
+        )

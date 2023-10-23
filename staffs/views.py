@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta
-from django.db.models import Q
+from django.utils import timezone
+from django.db.models import Q, F
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.exceptions import NotFound
 from rest_framework import status
-from .serializers import StaffSerializer, StaffUpdateSerializer
+from .serializers import StaffSerializer, StaffUpdateSerializer, StaffDashbordSerializer
 from .models import Staff
 from companies.models import Company
 from companies.serializers import (
@@ -58,19 +59,39 @@ class StaffsUpdateAPIView(APIView):
         return Response("ok")
 
 
-class StaffDashbord(APIView):
+class StaffDashbord35Day(APIView):
     def get_object(self, pk):
+        current_date = timezone.now()
+        date_35_days_ago = current_date - timedelta(days=35)
         try:
             company = Company.objects.get(pk=pk)
-            companyStaffs = company.staffs.filter(
-                pre_examination_date__lte=datetime.now().date()
+            inclued_35day_staffs = company.staffs.filter(
+                join_date__gte=date_35_days_ago
             )
-            print(companyStaffs)
-            return companyStaffs
+            return inclued_35day_staffs
         except Company.DoesNotExist:
             raise NotFound("Company not found or pre_examination_date is not valid.")
 
     def get(self, request, pk):
         companies = self.get_object(pk)
-        serializer = StaffSerializer(companies, many=True)
+        serializer = StaffDashbordSerializer(companies, many=True)
+        return Response(serializer.data)
+
+
+class StaffDashbord(APIView):
+    def get_object(self, pk):
+        current_date = timezone.now()
+        date_35_days_ago = current_date - timedelta(days=35)
+        try:
+            company = Company.objects.get(pk=pk)
+            inclued_35day_staffs = company.staffs.filter(
+                join_date__lte=date_35_days_ago
+            )
+            return inclued_35day_staffs
+        except Company.DoesNotExist:
+            raise NotFound("Company not found or pre_examination_date is not valid.")
+
+    def get(self, request, pk):
+        companies = self.get_object(pk)
+        serializer = StaffDashbordSerializer(companies, many=True)
         return Response(serializer.data)

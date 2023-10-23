@@ -37,3 +37,29 @@ class Seg(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def once_cycle_date(self):
+        check_cycles = [
+            factor.check_cycle
+            for factor in self.factors.all()
+            if factor.check_cycle is not None
+        ]
+
+        if not check_cycles:
+            return None
+
+        min_check_cycle = min(check_cycles)
+        return min_check_cycle
+
+    def regular_cycle_date(self):
+        regular_check_cycles = [
+            factor.regular_check_cycle
+            for factor in self.factors.all()
+            if factor.regular_check_cycle is not None
+        ]
+
+        if not regular_check_cycles:
+            return None
+
+        min_regular_check_cycle = min(regular_check_cycles)
+        return min_regular_check_cycle

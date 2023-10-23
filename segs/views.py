@@ -18,11 +18,7 @@ class Factors(APIView):
 class Segs(APIView):
     def get(self, request):
         all_seg_type = Seg.objects.all()
-        serializer = SegSerializer(
-            all_seg_type,
-            many=True,
-        )
-        return Response(serializer.data)
+        return Response(all_seg_type.data)
 
 
 class SegDetail(APIView):
