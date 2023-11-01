@@ -1,5 +1,6 @@
 from django.db import models
 from segs.models import Seg
+from opinions.models import Opinion
 
 
 class G_examination(models.Model):
@@ -34,6 +35,9 @@ class Staff(models.Model):
 
     segs = models.ForeignKey(
         Seg, related_name="staffs", on_delete=models.CASCADE, null=False
+    )
+    opinions = models.ForeignKey(
+        Opinion, related_name="staffs", on_delete=models.CASCADE, null=False
     )
 
     def __str__(self) -> str:

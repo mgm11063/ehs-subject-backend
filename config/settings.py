@@ -47,6 +47,7 @@ CUSTOM_APPS = [
     "companies.apps.CompaniesConfig",
     "segs.apps.SegsConfig",
     "staffs.apps.StaffsConfig",
+    "opinions.apps.OpinionsConfig",
 ]
 
 INSTALLED_APPS = SYSTEM_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
