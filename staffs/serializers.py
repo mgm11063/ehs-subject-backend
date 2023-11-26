@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Staff, G_examination, S_examination
 from segs.models import Seg
 from segs.serializers import SegSerializer
+from opinions.serializers import OpinionSerializer
 from rest_framework import serializers
 
 
@@ -19,6 +20,7 @@ class SExaminationSerializer(serializers.ModelSerializer):
 
 class StaffSerializer(serializers.ModelSerializer):
     segs = SegSerializer()
+    opinions = OpinionSerializer()
 
     class Meta:
         model = Staff
@@ -32,6 +34,7 @@ class StaffSerializer(serializers.ModelSerializer):
             "join_date",
             "pre_examination_date",
             "segs",
+            "opinions",
         )
 
     def create(self, validated_data):
@@ -50,6 +53,7 @@ class StaffUpdateSerializer(serializers.ModelSerializer):
 
 class StaffDashbordSerializer(serializers.ModelSerializer):
     segs = SegSerializer()
+    opinions = OpinionSerializer()
 
     class Meta:
         model = Staff
@@ -63,4 +67,5 @@ class StaffDashbordSerializer(serializers.ModelSerializer):
             "join_date",
             "pre_examination_date",
             "segs",
+            "opinions",
         )
