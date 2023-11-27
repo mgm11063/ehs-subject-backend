@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "poltergeist"
+name = "ehs-subject-backend"
 version = "0.1.0"
 description = ""
 authors = ["Chris <qkymzh123@gmail.com>"]
