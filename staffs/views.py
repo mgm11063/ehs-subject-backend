@@ -9,10 +9,6 @@ from rest_framework import status
 from .serializers import StaffSerializer, StaffUpdateSerializer, StaffDashbordSerializer
 from .models import Staff
 from companies.models import Company
-from companies.serializers import (
-    CompanyDetailSerializer,
-    CompanySerializer,
-)
 
 
 class Staffs(APIView):

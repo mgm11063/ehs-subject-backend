@@ -36,9 +36,7 @@ class Staff(models.Model):
     segs = models.ForeignKey(
         Seg, related_name="staffs", on_delete=models.CASCADE, null=False
     )
-    opinions = models.ForeignKey(
-        Opinion, related_name="staffs", on_delete=models.CASCADE, null=False
-    )
+    opinions = models.ManyToManyField(Opinion, related_name="staffs", null=False)
 
     def __str__(self) -> str:
         return self.name

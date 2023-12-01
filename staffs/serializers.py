@@ -20,7 +20,9 @@ class SExaminationSerializer(serializers.ModelSerializer):
 
 class StaffSerializer(serializers.ModelSerializer):
     segs = SegSerializer()
-    opinions = OpinionSerializer()
+    opinions = OpinionSerializer(
+        many=True,
+    )
 
     class Meta:
         model = Staff
@@ -53,7 +55,9 @@ class StaffUpdateSerializer(serializers.ModelSerializer):
 
 class StaffDashbordSerializer(serializers.ModelSerializer):
     segs = SegSerializer()
-    opinions = OpinionSerializer()
+    opinions = OpinionSerializer(
+        many=True,
+    )
 
     class Meta:
         model = Staff
